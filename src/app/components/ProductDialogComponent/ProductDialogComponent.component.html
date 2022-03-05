@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>{{isEditAction === false ? 'Add Product Form' : 'Update Product Form'}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="productFrom">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Product Name</mat-label>
+        <input matInput placeholder="Name" formControlName="productName"/>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Product Category</mat-label>
+        <mat-select placeholder="category" formControlName="category">
+          <mat-option value="Fruits">Fruits</mat-option>
+          <mat-option value="Vegetables">Vegetables</mat-option>
+          <mat-option value="Electronics">Electronics</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" type="datetime" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <label><h6>Product Rating</h6></label>
+      <mat-radio-group class="radio-group" formControlName="rating">
+        <mat-radio-button
+          class="radio-button"
+          *ngFor="let item of productRating"
+          [value]="item"
+        >
+          {{ item }}<mat-icon colo>star_border</mat-icon>
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="0" type="number" formControlName="price" />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Comment</mat-label>
+        <textarea matInput formControlName="comment"></textarea>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button class="ml3" mat-raised-button color="primary" (click)="productManagement()">{{isEditAction === false ? 'Save' : 'Update'}}</button>
+</div>
